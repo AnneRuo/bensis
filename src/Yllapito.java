@@ -28,7 +28,11 @@ public class Yllapito extends JFrame {
 	private JMenu mnTiedosto;
 	private JMenuItem mntmOhje;
 	private JMenuItem mntmTietoja;
-
+	private JMenuItem mntmSulje;
+	
+	private Ohjeikkuna ohjeikkuna = new Ohjeikkuna();
+	private Tietoja tietoikkuna = new Tietoja();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -61,10 +65,32 @@ public class Yllapito extends JFrame {
 		menuBar.add(mnTiedosto);
 		
 		mntmOhje = new JMenuItem("Ohje");
+		mntmOhje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ohjeikkuna.dispose();
+				ohjeikkuna = new Ohjeikkuna();
+				ohjeikkuna.setVisible(true);
+			}
+		});
 		mnTiedosto.add(mntmOhje);
 		
 		mntmTietoja = new JMenuItem("Tietoja");
+		mntmTietoja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tietoikkuna.dispose();
+				tietoikkuna = new Tietoja();
+				tietoikkuna.setVisible(true);
+			}
+		});
 		mnTiedosto.add(mntmTietoja);
+		
+		mntmSulje = new JMenuItem("Sulje");
+		mntmSulje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Yllapito.this.setVisible(false);
+			}
+		});
+		mnTiedosto.add(mntmSulje);
 		
 		contentPane = new JPanel() {
 		public void paintComponent(Graphics g) {  

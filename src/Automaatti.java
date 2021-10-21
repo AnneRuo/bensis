@@ -35,6 +35,9 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import java.awt.Graphics;  
 import java.awt.Image;  
@@ -54,7 +57,7 @@ public class Automaatti extends JFrame {
 	private JLabel label_price98;
 	private JRadioButton rdbtn95;
 	private JRadioButton rdbtn98;
-	private JTextField txtPinkoodi;
+	private JPasswordField txtPinkoodi;
 	private JLabel lblTankattava;
 	private JLabel lblMaara;
 	private JLabel lblPinkoodi;
@@ -65,15 +68,28 @@ public class Automaatti extends JFrame {
 	private JLabel label_tarjous;
 	private JButton btnAdmin;
 	private JSlider slider;
-	private JTextField textField_litrat;
+	private JLabel textField_litrat;
 	private JLabel lblEurot;
 	private JLabel lblValuutta;
+	private JButton button1;
+	private JButton button2;
+	private JButton button3;
+	private JButton button4;
+	private JButton button5;
+	private JButton button6;
+	private JButton button7;
+	private JButton button8;
+	private JButton button9;
+	private JButton buttonCancel;
+	private JButton button0;
+	private JButton buttonBack;
 	
 	private Salasanaikkuna salasanaIkkuna = new Salasanaikkuna();
 	
 	String hinta95;
 	String hinta98;
 	String tarjous;
+	String pinInput = "";
 	int tankki95;
 	int tankki98;
 	double maksu;
@@ -84,6 +100,7 @@ public class Automaatti extends JFrame {
 	String filenameTarjous = "src/Resources/tarjous.txt";
 	String filenameTankit = "src/Resources/tankit.txt";
 	String filenameOstokset = "src/Resources/ostokset.txt";
+
 	
 	/**
 	 * Launch the application.
@@ -229,14 +246,14 @@ public class Automaatti extends JFrame {
 		slider.setBounds(588, 139, 134, 16);
 		contentPane.add(slider);
 		
-		textField_litrat = new JTextField();
+		textField_litrat = new JLabel();
 		textField_litrat.setText("20");
 		textField_litrat.setBounds(588, 167, 37, 19);
 		contentPane.add(textField_litrat);
-		textField_litrat.setColumns(10);
+
 		
 		lblLitraa = new JLabel("litraa");
-		lblLitraa.setBounds(632, 169, 64, 15);
+		lblLitraa.setBounds(637, 169, 64, 15);
 		contentPane.add(lblLitraa);
 		
 		lblEurot = new JLabel("");
@@ -245,17 +262,155 @@ public class Automaatti extends JFrame {
 		contentPane.add(lblEurot);
 		
 		lblValuutta = new JLabel("€");
-		lblValuutta.setBounds(642, 197, 31, 15);
+		lblValuutta.setBounds(637, 197, 31, 15);
 		contentPane.add(lblValuutta);
 		
 		
 		// Syötetään pankkikortin pin-koodi
+		button1 = new JButton("1");
+		button1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pinInput = pinInput + "1";
+				txtPinkoodi.setText(pinInput);
+			}
+		});
+		button1.setFont(new Font("Dialog", Font.BOLD, 12));
+		button1.setBounds(588, 292, 51, 37);
+		contentPane.add(button1);
+		
+		button2 = new JButton("2");
+		button2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pinInput = pinInput + "2";
+				txtPinkoodi.setText(pinInput);
+			}
+		});
+		button2.setFont(new Font("Dialog", Font.BOLD, 12));
+		button2.setBounds(640, 292, 51, 37);
+		contentPane.add(button2);
+		
+		button3 = new JButton("3");
+		button3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pinInput = pinInput + "3";
+				txtPinkoodi.setText(pinInput);
+			}
+		});
+		button3.setFont(new Font("Dialog", Font.BOLD, 12));
+		button3.setBounds(692, 292, 51, 37);
+		contentPane.add(button3);
+		
+		button4 = new JButton("4");
+		button4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pinInput = pinInput + "4";
+				txtPinkoodi.setText(pinInput);
+			}
+		});
+		button4.setFont(new Font("Dialog", Font.BOLD, 12));
+		button4.setBounds(588, 330, 51, 37);
+		contentPane.add(button4);
+		
+		button5 = new JButton("5");
+		button5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pinInput = pinInput + "5";
+				txtPinkoodi.setText(pinInput);
+			}
+		});
+		button5.setFont(new Font("Dialog", Font.BOLD, 12));
+		button5.setBounds(640, 330, 51, 37);
+		contentPane.add(button5);
+		
+		button6 = new JButton("6");
+		button6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pinInput = pinInput + "6";
+				txtPinkoodi.setText(pinInput);
+			}
+		});
+		button6.setFont(new Font("Dialog", Font.BOLD, 12));
+		button6.setBounds(692, 330, 51, 37);
+		contentPane.add(button6);
+		
+		button7 = new JButton("7");
+		button7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pinInput = pinInput + "7";
+				txtPinkoodi.setText(pinInput);
+			}
+		});
+		button7.setFont(new Font("Dialog", Font.BOLD, 12));
+		button7.setBounds(588, 368, 51, 37);
+		contentPane.add(button7);
+		
+		button8 = new JButton("8");
+		button8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pinInput = pinInput + "8";
+				txtPinkoodi.setText(pinInput);
+			}
+		});
+		button8.setFont(new Font("Dialog", Font.BOLD, 12));
+		button8.setBounds(640, 368, 51, 37);
+		contentPane.add(button8);
+		
+		button9 = new JButton("9");
+		button9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pinInput = pinInput + "9";
+				txtPinkoodi.setText(pinInput);
+			}
+		});
+		button9.setFont(new Font("Dialog", Font.BOLD, 12));
+		button9.setBounds(692, 368, 51, 37);
+		contentPane.add(button9);
+		
+		buttonCancel = new JButton("X");
+		buttonCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Tankkaus keskeytetty");
+				pinInput = "";
+				txtPinkoodi.setText(pinInput);
+				slider.setValue(20);
+				textField_litrat.setText("20");
+				maksu = slider.getValue() * Double.parseDouble(label_price95.getText());
+				lblEurot.setText(String.valueOf(df.format(maksu)));
+			}
+		});
+		buttonCancel.setFont(new Font("Dialog", Font.BOLD, 12));
+		buttonCancel.setBounds(588, 406, 51, 37);
+		contentPane.add(buttonCancel);
+		
+		button0 = new JButton("0");
+		button0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pinInput = pinInput + "0";
+				txtPinkoodi.setText(pinInput);
+			}
+		});
+		button0.setFont(new Font("Dialog", Font.BOLD, 12));
+		button0.setBounds(640, 406, 51, 37);
+		contentPane.add(button0);
+		
+		buttonBack = new JButton("◄");
+		buttonBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pinInput = pinInput.substring(0, pinInput.length() - 1);
+				txtPinkoodi.setText(pinInput);
+			}
+		});
+		buttonBack.setFont(new Font("Dialog", Font.BOLD, 20));
+		buttonBack.setBounds(692, 406, 51, 37);
+		contentPane.add(buttonBack);
+		
 		lblPinkoodi = new JLabel("Syötä pin-koodi");
 		lblPinkoodi.setBounds(587, 235, 120, 15);
 		contentPane.add(lblPinkoodi);
 		
+		// limit the number of characters  !!!!!!!!
 		txtPinkoodi = new JPasswordField();
-		txtPinkoodi.setBounds(587, 259, 37, 19);
+		txtPinkoodi.setBounds(588, 262, 52, 19);
 		contentPane.add(txtPinkoodi);
 		txtPinkoodi.setColumns(10);
 		
@@ -265,6 +420,7 @@ public class Automaatti extends JFrame {
 				try { //kryptataan pin
 					String oikea_pin = crypt("1234");
 					String pin_crypted = "";
+					String choice = "";
 					
 					try {
 						pin_crypted = crypt(txtPinkoodi.getText());
@@ -273,7 +429,8 @@ public class Automaatti extends JFrame {
 					}
 					//Tarkistetaan pin
 					if (oikea_pin.equals(pin_crypted)) { 
-						int result = JOptionPane.showConfirmDialog(null, "Varmista tankkaus","", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+						
+						int result = JOptionPane.showConfirmDialog(null, "Vahvista tankkaus","", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 						if( result == JOptionPane.OK_OPTION ) {
 							
 							String txtTankit;
@@ -283,19 +440,30 @@ public class Automaatti extends JFrame {
 															
 							if (rdbtn95.isSelected()) {
 								tankki95 = tankki95 - vahennys;
+								choice = "95";
 								txtTankit  = "tankki95 = " + tankki95 + "\ntankki98 = " + tankki98;
 								paivitaTankit(txtTankit);
-								tallennaOstokset("Polttoaine 95: " + tankkaus + " litraa, " + maksu + " euroa.");
+								tallennaOstokset("Polttoaine 95: " + tankkaus + " litraa, " + df.format(vahennys) + " euroa.");
 								
 								
 							} else if (rdbtn98.isSelected()) {
 								tankki98 = tankki98 - vahennys;
+								choice = "98";
 								txtTankit = "tankki95 = " + tankki95 + "\ntankki98 = " + tankki98;
 								paivitaTankit(txtTankit);
-								tallennaOstokset("Polttoaine 98: " + tankkaus + " litraa, " + maksu + " euroa.");
+								tallennaOstokset("Polttoaine 98: " + tankkaus + " litraa, " + df.format(maksu) + " euroa.");
 								
 							}
-							JOptionPane.showMessageDialog(null, "Voit aloittaa tankkauksen.");
+							int kuitti = JOptionPane.showConfirmDialog(null, "Haluatko tulostaa kuitin?", "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+							if( kuitti == JOptionPane.OK_OPTION ) {
+								java.util.Date datekuitti = new java.util.Date();
+								JOptionPane.showMessageDialog(null, datekuitti.toString() + "\n\nPolttoaine: " + choice + "\nMäärä: " + tankkaus + " litraa\nVeloitus: " 
+								+ df.format(maksu) + " euroa\nMaksettu luottokortilla.\n\nKiitos käynnistä ja tervetuloa uudelleen!");
+							}
+							if( kuitti == JOptionPane.NO_OPTION ) {
+								JOptionPane.showMessageDialog(null, "Kiitos käynnistä ja tervetuloa uudelleen!");
+							}
+							
 							slider.setValue(20);
 							textField_litrat.setText("20");
 							txtPinkoodi.setText("");
@@ -305,19 +473,27 @@ public class Automaatti extends JFrame {
 							
 						if( result == JOptionPane.NO_OPTION ) {
 							JOptionPane.showMessageDialog(null, "Tankkaus keskeytetty");
+							slider.setValue(20);
+							textField_litrat.setText("20");
+							txtPinkoodi.setText("");
+							maksu = slider.getValue() * Double.parseDouble(label_price95.getText());
+							lblEurot.setText(String.valueOf(df.format(maksu)));
 						}
 						
 					} else {
 						JOptionPane.showMessageDialog(null, "Väärä pin");
+						txtPinkoodi.setText("");
+						pinInput = "";
 					}
 					
 				} catch (NumberFormatException e1) {
 					JOptionPane.showMessageDialog(null, "Virheellinen syöte");
 				}	
 			}
+
 			
 		});
-		btnTankkaa.setBounds(587, 302, 117, 25);
+		btnTankkaa.setBounds(598, 466, 117, 25);
 		contentPane.add(btnTankkaa);
 		
 		
@@ -330,7 +506,7 @@ public class Automaatti extends JFrame {
 				salasanaIkkuna.setVisible(true);
 			}
 		});
-		btnAdmin.setBounds(643, 478, 117, 25);
+		btnAdmin.setBounds(40, 466, 117, 25);
 		contentPane.add(btnAdmin);
 		
 		
@@ -339,6 +515,7 @@ public class Automaatti extends JFrame {
 		naytaTarjous(filenameTarjous);
 		maksu = slider.getValue() * Double.parseDouble(label_price95.getText());
 		lblEurot.setText(String.valueOf(df.format(maksu)));
+		
 	}
 	
 	public void lueHinnat(String filenameHinnat) {

@@ -3,3 +3,16 @@ Wed Oct 20 21:36:32 EEST 2021 : Polttoaine 98: 50 litraa, 99.15 euroa.
 Wed Oct 20 21:38:51 EEST 2021 : Polttoaine 95: 38 litraa, 59.432 euroa.
 Wed Oct 20 21:42:30 EEST 2021 : Polttoaine 95: 100 litraa, 156.4 euroa.
 Wed Oct 20 21:42:46 EEST 2021 : Polttoaine 98: 50 litraa, 78.2 euroa.
+Thu Oct 21 16:09:07 EEST 2021 : Polttoaine 95: 20 litraa, 31.28 euroa.
+Thu Oct 21 16:09:20 EEST 2021 : Polttoaine 95: 52 litraa, 81.328 euroa.
+Thu Oct 21 16:17:26 EEST 2021 : Polttoaine 95: 100 litraa, 156.4 euroa.
+Thu Oct 21 16:18:29 EEST 2021 : Polttoaine 98: 100 litraa, 198.3 euroa.
+Thu Oct 21 16:20:51 EEST 2021 : Polttoaine 95: 55 litraa, 86.02000000000001 euroa.
+Thu Oct 21 16:34:53 EEST 2021 : Polttoaine 98: 52 litraa, 81.33 euroa.
+Thu Oct 21 16:35:52 EEST 2021 : Polttoaine 98: 68 litraa, 106.35 euroa.
+Thu Oct 21 16:38:04 EEST 2021 : Polttoaine 98: 61 litraa, 120.96 euroa.
+Thu Oct 21 16:40:56 EEST 2021 : Polttoaine 98: 53 litraa, 105.1 euroa.
+Thu Oct 21 16:45:34 EEST 2021 : Polttoaine 95: 67 litraa, 67 euroa.
+Thu Oct 21 16:47:30 EEST 2021 : Polttoaine 95: 20 litraa, 20 euroa.
+Thu Oct 21 21:22:28 EEST 2021 : Polttoaine 95: 20 litraa, 20 euroa.
+Thu Oct 21 21:30:14 EEST 2021 : Polttoaine 98: 72 litraa, 142.78 euroa.
