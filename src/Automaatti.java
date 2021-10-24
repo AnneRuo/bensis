@@ -137,7 +137,8 @@ public class Automaatti extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		// BENSAMITTARI
+		// BENSATOLPPA
+		// Hinnat
 		lblHinta = new JLabel("Polttoainehinnat");
 		lblHinta.setForeground(Color.BLACK);
 		lblHinta.setFont(new Font("Dialog", Font.BOLD, 18));
@@ -192,7 +193,7 @@ public class Automaatti extends JFrame {
 		label_price98.setBounds(12, 10, 77, 25);
 		panel_price98.add(label_price98);
 		
-		// PÄIVÄN TARJOUS
+		// Päivän tarjous
 		lblTarjous = new JLabel("Päivän tarjous");
 		lblTarjous.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblTarjous.setBounds(40, 189, 148, 23);
@@ -266,7 +267,7 @@ public class Automaatti extends JFrame {
 		contentPane.add(lblValuutta);
 		
 		
-		// Syötetään pankkikortin pin-koodi
+		// Syötetään luottokortin pin-koodi numeronäppäimistöltä
 		button1 = new JButton("1");
 		button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -366,16 +367,12 @@ public class Automaatti extends JFrame {
 		button9.setBounds(692, 368, 51, 37);
 		contentPane.add(button9);
 		
+		// X keskeyttää koko tankkauksen
 		buttonCancel = new JButton("X");
 		buttonCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Tankkaus keskeytetty");
-				pinInput = "";
-				txtPinkoodi.setText(pinInput);
-				slider.setValue(20);
-				textField_litrat.setText("20");
-				maksu = slider.getValue() * Double.parseDouble(label_price95.getText());
-				lblEurot.setText(String.valueOf(df.format(maksu)));
+				nollaaArvot();
 			}
 		});
 		buttonCancel.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -393,6 +390,8 @@ public class Automaatti extends JFrame {
 		button0.setBounds(640, 406, 51, 37);
 		contentPane.add(button0);
 		
+		
+		// <- poistaa viimeisimmän merkin
 		buttonBack = new JButton("◄");
 		buttonBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -408,12 +407,12 @@ public class Automaatti extends JFrame {
 		lblPinkoodi.setBounds(587, 235, 120, 15);
 		contentPane.add(lblPinkoodi);
 		
-		// limit the number of characters  !!!!!!!!
 		txtPinkoodi = new JPasswordField();
 		txtPinkoodi.setBounds(588, 262, 52, 19);
 		contentPane.add(txtPinkoodi);
 		txtPinkoodi.setColumns(10);
 		
+		// TANKKAA BUTTON
 		btnTankkaa = new JButton("TANKKAA");
 		btnTankkaa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -427,17 +426,21 @@ public class Automaatti extends JFrame {
 					} catch (Exception e2) {
 						
 					}
-					//Tarkistetaan pin
+					//TARKISTETAAN PIN
+					// Jos pin oikein					
 					if (oikea_pin.equals(pin_crypted)) { 
 						
 						int result = JOptionPane.showConfirmDialog(null, "Vahvista tankkaus","", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+						
+						// Jos tankkaus vahvistettu
 						if( result == JOptionPane.OK_OPTION ) {
 							
 							String txtTankit;
 							String tankkaus = textField_litrat.getText();
 							int vahennys = Integer.parseInt(tankkaus);
 							tarkistaTankit(filenameTankit);
-															
+							
+							// Päivitetään tankkien litrat ja tallennetaan ostokset:
 							if (rdbtn95.isSelected()) {
 								tankki95 = tankki95 - vahennys;
 								choice = "95";
@@ -454,6 +457,8 @@ public class Automaatti extends JFrame {
 								tallennaOstokset("Polttoaine 98: " + tankkaus + " litraa, " + df.format(maksu) + " euroa.");
 								
 							}
+							
+							// Kuitin tulostusmahdollisuus
 							int kuitti = JOptionPane.showConfirmDialog(null, "Haluatko tulostaa kuitin?", "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 							if( kuitti == JOptionPane.OK_OPTION ) {
 								java.util.Date datekuitti = new java.util.Date();
@@ -464,28 +469,24 @@ public class Automaatti extends JFrame {
 								JOptionPane.showMessageDialog(null, "Kiitos käynnistä ja tervetuloa uudelleen!");
 							}
 							
-							slider.setValue(20);
-							textField_litrat.setText("20");
-							txtPinkoodi.setText("");
-							maksu = slider.getValue() * Double.parseDouble(label_price95.getText());
-							lblEurot.setText(String.valueOf(df.format(maksu)));
-						}
-							
-						if( result == JOptionPane.NO_OPTION ) {
-							JOptionPane.showMessageDialog(null, "Tankkaus keskeytetty");
-							slider.setValue(20);
-							textField_litrat.setText("20");
-							txtPinkoodi.setText("");
-							maksu = slider.getValue() * Double.parseDouble(label_price95.getText());
-							lblEurot.setText(String.valueOf(df.format(maksu)));
+							// Palautetaan alkuarvot tankkauksen jälkeen
+							nollaaArvot();
 						}
 						
+						// Tankkausta ei halutakaan suorittaa - palautetaan alkuarvot
+						if( result == JOptionPane.NO_OPTION ) {
+							JOptionPane.showMessageDialog(null, "Tankkaus keskeytetty");
+							nollaaArvot();
+						}
+					
+					// Pin-koodi väärä, tyhjennetään kenttä
 					} else {
 						JOptionPane.showMessageDialog(null, "Väärä pin");
 						txtPinkoodi.setText("");
 						pinInput = "";
 					}
-					
+				
+				// Virheellinen syöte pin-koodille	
 				} catch (NumberFormatException e1) {
 					JOptionPane.showMessageDialog(null, "Virheellinen syöte");
 				}	
@@ -497,7 +498,7 @@ public class Automaatti extends JFrame {
 		contentPane.add(btnTankkaa);
 		
 		
-		// ADMIN
+		// YLLÄPITO BUTTON
 		btnAdmin = new JButton("Ylläpito");
 		btnAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -510,7 +511,7 @@ public class Automaatti extends JFrame {
 		contentPane.add(btnAdmin);
 		
 		
-		// FUNCTIONS
+		// Luetaan hinnat ja tarjous ohjelman avauksen yhteydessä
 		lueHinnat(filenameHinnat);
 		naytaTarjous(filenameTarjous);
 		maksu = slider.getValue() * Double.parseDouble(label_price95.getText());
@@ -583,7 +584,17 @@ public class Automaatti extends JFrame {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void nollaaArvot() {
+		rdbtn95.setSelected(true);
+		rdbtn98.setSelected(false);
+		slider.setValue(20);
+		textField_litrat.setText("20");
+		txtPinkoodi.setText("");
+		pinInput = "";
+		maksu = slider.getValue() * Double.parseDouble(label_price95.getText());
+		lblEurot.setText(String.valueOf(df.format(maksu)));
+	}
 
 	public static String crypt(String str) {
 	    if (str == null || str.length() == 0) {

@@ -1,2 +1,2 @@
-tankki95 = 1448
-tankki98 = 847
+tankki95 = 1927
+tankki98 = 1000
